@@ -1,6 +1,6 @@
 // app/page.tsx
 import { Metadata } from 'next'
-import LandingPage from '@/app/components/landing-page/LandingPage'
+import LandingPage from '@/components/landing-page/LandingPage'
 
 export const metadata: Metadata = {
   title: 'EventPro - Creating Unforgettable Experiences',
@@ -8,5 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  return <LandingPage />
+  return (
+    <>
+  <LandingPage />
+  </>
+  )
 }
