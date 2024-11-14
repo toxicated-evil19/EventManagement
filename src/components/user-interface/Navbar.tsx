@@ -22,7 +22,8 @@ const NavigationItems = () => (
   </>
 );
 
-const Navbar = ({ isScrolled }) => {
+const Navbar: React.FC<{ isScrolled: boolean }> = ({ isScrolled }) => {
+
   return (
     <nav className={cn(
       "fixed w-full z-50 transition-all duration-300",
