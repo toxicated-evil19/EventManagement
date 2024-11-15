@@ -1,110 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
+import { TypeAnimation } from 'react-type-animation';
 import { ChevronRight } from "lucide-react";
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
   const slides = [
     {
       image: '/images/birthday.jpg',
       title: 'Creating Unforgettable Experiences',
-      subtitle: 'Transform your vision into extraordinary events',
-      accent: 'from-rose-500 to-purple-500'
+      subtitle: 'Transform your vision into extraordinary events'
     },
     {
       image: '/images/beach.jpg',
       title: `Celebrate Life's Moments`,
-      subtitle: 'Design your perfect celebration',
-      accent: 'from-blue-500 to-teal-500'
+      subtitle: 'Design your perfect celebration'
     },
     {
       image: '/images/tech.jpg',
       title: 'Professional Excellence',
-      subtitle: 'Corporate events that leave lasting impressions',
-      accent: 'from-amber-500 to-rose-500'
+      subtitle: 'Corporate events that leave lasting impressions'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1567530331069-630c6a3926f3?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      title: 'Family-Friendly Events',
+      subtitle: 'Make your event more enjoyable for guests'
     }
   ];
 
   useEffect(() => {
-    setIsLoading(false);
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
-  const words = [
-    "Transform your vision into extraordinary events",
-    "Celebrate life's special moments with style",
-    "Craft memories that last a lifetime",
-    "Experience the magic of flawless planning"
-  ];
-
-  const [currentWord, setCurrentWord] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [text, setText] = useState('');
-  const [delta, setDelta] = useState(100);
-
-  useEffect(() => {
-    let ticker = setInterval(() => {
-      tick();
-    }, delta);
-
-    return () => clearInterval(ticker);
-  }, [text, isDeleting, currentWord]);
-
-  const tick = () => {
-    let fullText = words[currentWord];
-    let updatedText = isDeleting 
-      ? fullText.substring(0, text.length - 1)
-      : fullText.substring(0, text.length + 1);
-
-    setText(updatedText);
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setDelta(200);
-    } else if (isDeleting && updatedText === '') {
-      setIsDeleting(false);
-      setCurrentWord((prev) => (prev + 1) % words.length);
-      setDelta(100);
-    }
-  };
-
   return (
-    <section className="min-h-screen w-full flex items-center justify-center overflow-hidden relative bg-black">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black to-gray-900 opacity-90" />
-      
+    <section className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden">
       {/* Background Slides */}
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out transform
-            ${currentSlide === index ? 'opacity-100 scale-105' : 'opacity-0 scale-100'}`}
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
           style={{
             backgroundImage: `url('${slide.image}')`,
+            opacity: currentSlide === index ? 1 : 0,
             filter: 'brightness(0.4)',
           }}
         />
       ))}
 
-      {/* Animated noise overlay */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-repeat animate-noise" 
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
-
       {/* Content */}
-      <div className={`relative container mx-auto px-4 text-center text-white transition-all duration-1000 
-        ${isLoading ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
-        
-        {/* Sliding titles */}
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
         {slides.map((slide, index) => (
           <div
             key={index}
@@ -114,59 +62,58 @@ const HeroSection = () => {
                 : 'opacity-0 translate-y-8'
             }`}
           >
-            <h1 className="text-4xl md:text-6xl lg:text-8xl font-serif mb-6 tracking-tight">
-              <span className={`bg-gradient-to-r ${slide.accent} bg-clip-text text-transparent`}>
-                {slide.title}
-              </span>
+            <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] leading-tight font-serif mb-6">
+              {slide.title}
             </h1>
           </div>
         ))}
 
-        {/* Typing effect */}
-        <div className="h-20 md:h-24 mb-6 mt-32">
-          <p className="text-lg md:text-xl lg:text-2xl text-gray-300">
-            {text}
-            <span className="animate-pulse">|</span>
-          </p>
+        <div className="h-16 sm:h-20 md:h-24 mb-6 mt-24 sm:mt-32">
+          <TypeAnimation
+            sequence={[
+              'Transform your vision into extraordinary events',
+              2000,
+              `Celebrate life's special moments with style`,
+              2000,
+              'Craft memories that last a lifetime',
+              2000,
+              'Experience the magic of flawless planning',
+              2000,
+            ]}
+            wrapper="p"
+            speed={60}
+            repeat={Infinity}
+            className="text-base sm:text-lg md:text-xl lg:text-2xl opacity-50"
+          />
         </div>
 
-        {/* Animated buttons */}
-        <div className="space-y-6">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
           <Button
             size="lg"
-            className={`bg-gradient-to-r ${slides[currentSlide].accent} hover:opacity-90 
-              text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg
-              group relative overflow-hidden`}
+            className="w-full sm:w-auto bg-rose-500 hover:bg-rose-600 text-white animate-pulse"
           >
-            <span className="relative z-10 flex items-center">
-              Plan Your Event 
-              <ChevronRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </span>
-            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
+            Plan Your Event <ChevronRight className="ml-2 w-4 h-4" />
           </Button>
 
-          <div>
-            <Button 
-              size="lg" 
-              className="bg-transparent border-2 border-white/20 text-white hover:bg-white/10 
-                transition-all duration-300 transform hover:scale-105"
-            >
-              Learn More
-            </Button>
-          </div>
+          <Button 
+            size="lg" 
+            className="w-full sm:w-auto bg-gray-100 text-rose-500 hover:text-rose-600 hover:bg-gray-300"
+          >
+            Learn More
+          </Button>
         </div>
 
-        {/* Enhanced carousel indicators */}
-        <div className="flex justify-center space-x-3 mt-12">
+        {/* Carousel Indicators */}
+        <div className="flex justify-center space-x-2 mt-8">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`transition-all duration-500 rounded-full 
-                ${currentSlide === index
-                  ? `w-12 h-1.5 bg-gradient-to-r ${slides[index].accent}`
-                  : 'w-3 h-1.5 bg-white/30 hover:bg-white/50'
-                }`}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                currentSlide === index
+                  ? 'bg-white/40 w-5'
+                  : 'bg-white/20'
+              }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
