@@ -46,7 +46,7 @@ const HeroSection = () => {
           style={{
             backgroundImage: `url('${slide.image}')`,
             opacity: currentSlide === index ? 1 : 0,
-            filter: 'brightness(0.4)',
+            filter: 'brightness(0.5)',
           }}
         />
       ))}
@@ -83,7 +83,7 @@ const HeroSection = () => {
             wrapper="p"
             speed={60}
             repeat={Infinity}
-            className="text-base sm:text-lg md:text-xl lg:text-2xl opacity-50"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl opacity-60"
           />
         </div>
 

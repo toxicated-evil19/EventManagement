@@ -16,8 +16,12 @@ const NavigationItems = ({ isScrolled = false, isMobile = false }) => (
           className={cn(
             "font-sans transition-all duration-300 cursor-pointer relative group",
             isMobile ? "text-gray-900 text-lg" : 
-            isScrolled ? "text-gray-900 hover:text-rose-500" : "text-white hover:text-rose-400",
-            "after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-rose-500 after:transition-all after:duration-300 hover:after:w-full"
+            isScrolled ? "text-gray-800 hover:text-rose-500" : "text-white hover:text-rose-300",
+            "after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5",
+            isScrolled 
+              ? "after:bg-rose-500" 
+              : "after:bg-white",
+            "after:transition-all after:duration-300 hover:after:w-full"
           )}
         >
           {item}
@@ -30,32 +34,32 @@ const NavigationItems = ({ isScrolled = false, isMobile = false }) => (
 const Navbar: React.FC<{ isScrolled: boolean }> = ({ isScrolled }) => {
   return (
     <nav className={cn(
-      "fixed w-full z-50 transition-all duration-300",
+      "fixed w-full h-16 z-50 transition-all duration-300",
       isScrolled
-        ? "bg-white shadow-md py-2"
-        : "bg-transparent py-4"
+        ? "bg-white/30 backdrop-blur-md border-b border-white/20"
+        : "bg-black/5 backdrop-blur-sm"
     )}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="container h-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-full">
           {/* Logo */}
           <span className={cn(
             "text-2xl md:text-3xl font-sans transition-all duration-300",
-            isScrolled ? "text-gray-900" : "text-white"
+            isScrolled ? "text-gray-800" : "text-white"
           )}>
             Events
           </span>
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden md:block">
-            <NavigationMenuList className="flex items-center gap-6 ">
+            <NavigationMenuList className="flex items-center gap-6">
               <NavigationItems isScrolled={isScrolled} /> 
               <NavigationMenuItem className="ml-4">
                 <Button
                   className={cn(
                     "flex items-center gap-2 transition-all duration-300",
                     isScrolled
-                      ? "bg-rose-500 hover:bg-rose-600 text-white"
-                      : "bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm border-white/30"
+                      ? "bg-rose-500/80 hover:bg-rose-600/90 text-white shadow-md hover:shadow-lg"
+                      : "bg-white/5 hover:bg-white/10 text-white border border-white/20 backdrop-blur-sm hover:shadow-lg"
                   )}
                 >
                   <LogIn className="w-4 h-4" />
@@ -74,14 +78,14 @@ const Navbar: React.FC<{ isScrolled: boolean }> = ({ isScrolled }) => {
                 size="icon"
                 className={cn(
                   "md:hidden",
-                  isScrolled ? "text-gray-900 hover:text-rose-500" : "text-white hover:text-rose-400"
+                  isScrolled ? "text-gray-800 hover:text-rose-500" : "text-white hover:text-rose-300"
                 )}
               >
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px] p-6">
-              <SheetTitle className="text-2xl font-sans text-gray-900 mb-4">
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] p-6 bg-white/60 backdrop-blur-xl">
+              <SheetTitle className="text-2xl font-sans text-gray-800 mb-4">
                 Menu
               </SheetTitle>
               <nav className="flex flex-col gap-6 mt-8">
@@ -89,7 +93,7 @@ const Navbar: React.FC<{ isScrolled: boolean }> = ({ isScrolled }) => {
                   <NavigationItems isScrolled={true} isMobile={true} />
                 </NavigationMenu>
                 <Button
-                  className="w-full bg-rose-500 hover:bg-rose-600 text-white mt-4"
+                  className="w-full bg-rose-500/80 hover:bg-rose-600/90 text-white mt-4 shadow-md hover:shadow-lg"
                 >
                   <LogIn className="mr-2 h-4 w-4" />
                   Login
