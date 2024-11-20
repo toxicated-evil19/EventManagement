@@ -1,0 +1,3 @@
+[submodule "eventbackend"]
+	path = eventbackend
+	url = https://github.com/toxicated-evil19/EventManagement.git
