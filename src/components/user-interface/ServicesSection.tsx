@@ -30,7 +30,7 @@ const ServicesSection = () => {
   return (
     <section className="relative py-8 md:py-16 px-4 sm:px-6 lg:px-8 container mx-auto overflow-hidden">
       {/* Simplified background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-rose-50/50 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-white to-rose-100/50 pointer-events-none rounded-lg"></div>
 
       <div className="relative">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-center mb-6 md:mb-8">
