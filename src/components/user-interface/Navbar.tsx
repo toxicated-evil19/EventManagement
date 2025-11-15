@@ -63,7 +63,7 @@ const Navbar: React.FC<{ isScrolled: boolean }> = ({ isScrolled }) => {
                   )}
                 >
                   <LogIn className="w-4 h-4" />
-                  Login
+                  Plan Event
                   <ChevronRight className="w-4 h-4" />
                 </Button>
               </NavigationMenuItem>
@@ -96,7 +96,7 @@ const Navbar: React.FC<{ isScrolled: boolean }> = ({ isScrolled }) => {
                   className="w-full bg-rose-500/80 hover:bg-rose-600/90 text-white mt-4 shadow-md hover:shadow-lg"
                 >
                   <LogIn className="mr-2 h-4 w-4" />
-                  Login
+                  Plan Event
                   <ChevronRight className="ml-2 w-4 h-4" />
                 </Button>
               </nav>

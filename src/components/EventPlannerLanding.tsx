@@ -26,8 +26,8 @@ const EventPlannerLanding = () => {
       <HeroSection />
       <ServicesSection />
       <GallerySection />
-      <BookingSection />
-      <DigitalToolsSection />
+      {/* <BookingSection /> */}
+      {/* <DigitalToolsSection /> */}
       <Footer />
     </div>
   );
