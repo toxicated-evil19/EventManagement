@@ -16,19 +16,19 @@ const Footer = () => {
                 <div className="w-10 h-10 bg-rose-500/10 rounded-full flex items-center justify-center group-hover:bg-rose-500/20">
                   <Phone className="w-5 h-5" />
                 </div>
-                <span className="text-sm sm:text-base">+1 234 567 8900</span>
+                <span className="text-sm sm:text-base">+91 9876543210</span>
               </a>
               <a href="mailto:contact@events.com" className="flex items-center gap-3 hover:text-rose-400 transition-all duration-300">
                 <div className="w-10 h-10 bg-rose-500/10 rounded-full flex items-center justify-center group-hover:bg-rose-500/20">
                   <Mail className="w-5 h-5" />
                 </div>
-                <span className="text-sm sm:text-base">contact@events.com</span>
+                <span className="text-sm sm:text-base">dummy@dummy.com</span>
               </a>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-rose-500/10 rounded-full flex items-center justify-center">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <span className="text-sm sm:text-base">123 Event Street, NY</span>
+                <span className="text-sm sm:text-base"></span>
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="mt-12 sm:mt-16 pt-8 border-t border-gray-800 text-center">
-          <p className="text-sm sm:text-base text-gray-400">© 2024 Events. All rights reserved.</p>
+          <p className="text-sm sm:text-base text-gray-400">© {new Date().getFullYear()} Events. All rights reserved.</p>
         </div>
       </div>
     </footer>
