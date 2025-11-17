@@ -1,30 +1,42 @@
 import React from 'react';
-import { Button } from "@/components/ui/button";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { LogIn, Menu, ChevronRight } from "lucide-react";
+import { Sparkles, Menu, X, ArrowRight, Calendar, Image, MessageCircle, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const NavigationItems = ({ isScrolled = false, isMobile = false }) => (
+const navigationLinks = [
+  { name: 'About', icon: Sparkles },
+  { name: 'Services', icon: Calendar },
+  { name: 'Gallery', icon: Image },
+  { name: 'Testimonials', icon: MessageCircle },
+  { name: 'Contact', icon: Mail }
+];
+
+const NavigationItems = ({ isScrolled = false, isMobile = false, onItemClick = () => {} }) => (
   <NavigationMenuList className={cn(
-    isMobile ? "flex flex-col space-y-4" : "space-x-8",
-    "items-center"
+    isMobile ? "flex flex-col space-y-2 w-full" : "flex items-center gap-2",
   )}>
-    {['Services', 'Gallery', 'Testimonials', 'Contact'].map((item) => (
-      <NavigationMenuItem key={item} className="mx-2">
+    {navigationLinks.map((item) => (
+      <NavigationMenuItem key={item.name}>
         <NavigationMenuLink
+          onClick={() => onItemClick()}
           className={cn(
-            "font-sans transition-all duration-300 cursor-pointer relative group",
-            isMobile ? "text-gray-900 text-lg" : 
-            isScrolled ? "text-gray-800 hover:text-rose-500" : "text-white hover:text-rose-300",
-            "after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5",
-            isScrolled 
-              ? "after:bg-rose-500" 
-              : "after:bg-white",
-            "after:transition-all after:duration-300 hover:after:w-full"
+            "group relative flex items-center gap-2 transition-all duration-300 cursor-pointer",
+            isMobile
+              ? "text-gray-900 text-base font-medium py-3 px-4 rounded-xl hover:bg-rose-50 w-full"
+              : isScrolled
+                ? "text-gray-700 hover:text-rose-600 px-4 py-2 rounded-full hover:bg-rose-50/50 font-medium text-sm"
+                : "text-white/90 hover:text-white px-4 py-2 rounded-full hover:bg-white/10 font-medium text-sm backdrop-blur-sm"
           )}
         >
-          {item}
+          {isMobile && <item.icon className="w-4 h-4 text-rose-500" />}
+          <span>{item.name}</span>
+          {!isMobile && (
+            <div className={cn(
+              "absolute bottom-0 left-4 right-4 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300",
+              isScrolled ? "bg-rose-500" : "bg-white"
+            )} />
+          )}
         </NavigationMenuLink>
       </NavigationMenuItem>
     ))}
@@ -32,74 +44,125 @@ const NavigationItems = ({ isScrolled = false, isMobile = false }) => (
 );
 
 const Navbar: React.FC<{ isScrolled: boolean }> = ({ isScrolled }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
   return (
     <nav className={cn(
-      "fixed w-full h-16 z-50 transition-all duration-300",
+      "fixed w-full z-50 transition-all duration-500",
       isScrolled
-        ? "bg-white/30 backdrop-blur-md border-b border-white/20"
-        : "bg-black/5 backdrop-blur-sm"
+        ? "bg-white/40 backdrop-blur-3xl border-b border-white/30 shadow-2xl shadow-black/10 py-3 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/50 before:to-transparent before:pointer-events-none"
+        : "bg-transparent py-4"
     )}>
-      <div className="container h-full mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-full">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <span className={cn(
-            "text-2xl md:text-3xl font-sans transition-all duration-300",
-            isScrolled ? "text-gray-800" : "text-white"
-          )}>
-            Events
-          </span>
+          <div className="flex items-center gap-3 group cursor-pointer">
+            {/* <div className={cn(
+              "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300",
+              isScrolled
+                ? "bg-gradient-to-br from-rose-500 to-rose-600 shadow-lg group-hover:shadow-rose-500/50"
+                : "bg-white/10 backdrop-blur-md border border-white/20 group-hover:bg-white/20"
+            )}>
+              <Sparkles className={cn(
+                "w-5 h-5 transition-all duration-300",
+                isScrolled ? "text-white" : "text-white"
+              )} />
+            </div> */}
+            <div className="flex flex-col">
+              <span className={cn(
+                "text-xl font-serif font-bold transition-all duration-300 leading-none",
+                isScrolled ? "text-gray-900" : "text-white"
+              )}>
+                EventCraft
+              </span>
+              <span className={cn(
+                "text-[10px] uppercase tracking-wider transition-all duration-300",
+                isScrolled ? "text-rose-500" : "text-rose-200"
+              )}>
+                Premium Events
+              </span>
+            </div>
+          </div>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden md:block">
-            <NavigationMenuList className="flex items-center gap-6">
-              <NavigationItems isScrolled={isScrolled} /> 
-              <NavigationMenuItem className="ml-4">
-                <Button
-                  className={cn(
-                    "flex items-center gap-2 transition-all duration-300",
-                    isScrolled
-                      ? "bg-rose-500/80 hover:bg-rose-600/90 text-white shadow-md hover:shadow-lg"
-                      : "bg-white/5 hover:bg-white/10 text-white border border-white/20 backdrop-blur-sm hover:shadow-lg"
-                  )}
-                >
-                  <LogIn className="w-4 h-4" />
-                  Plan Event
-                  <ChevronRight className="w-4 h-4" />
-                </Button>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+          <div className="hidden lg:flex items-center gap-2">
+            <NavigationMenu>
+              <NavigationItems isScrolled={isScrolled} />
+            </NavigationMenu>
 
-          {/* Mobile Menu */}
-          <Sheet>
+            <button className={cn(
+              "ml-4 flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 group backdrop-blur-xl",
+              isScrolled
+                ? "bg-gradient-to-r from-rose-500 to-rose-600 text-white shadow-lg hover:shadow-xl hover:shadow-rose-500/50 hover:scale-105"
+                : "bg-white/90 text-rose-600 shadow-xl hover:shadow-2xl hover:scale-105 border border-white/50"
+            )}>
+              <span>Plan Your Event</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
+              <button
                 className={cn(
-                  "md:hidden",
-                  isScrolled ? "text-gray-800 hover:text-rose-500" : "text-white hover:text-rose-300"
+                  "lg:hidden p-2 rounded-xl transition-all duration-300",
+                  isScrolled
+                    ? "text-gray-700 hover:bg-rose-50"
+                    : "text-white hover:bg-white/10 backdrop-blur-sm"
                 )}
               >
-                <Menu className="h-6 w-6" />
-              </Button>
+                {mobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px] p-6 bg-white/60 backdrop-blur-xl">
-              <SheetTitle className="text-2xl font-sans text-gray-800 mb-4">
-                Menu
-              </SheetTitle>
-              <nav className="flex flex-col gap-6 mt-8">
-                <NavigationMenu orientation="vertical" className="w-full">
-                  <NavigationItems isScrolled={true} isMobile={true} />
-                </NavigationMenu>
-                <Button
-                  className="w-full bg-rose-500/80 hover:bg-rose-600/90 text-white mt-4 shadow-md hover:shadow-lg"
-                >
-                  <LogIn className="mr-2 h-4 w-4" />
-                  Plan Event
-                  <ChevronRight className="ml-2 w-4 h-4" />
-                </Button>
-              </nav>
+            <SheetContent
+              side="right"
+              className="w-[300px] sm:w-[350px] bg-white/95 backdrop-blur-2xl border-l border-gray-200/50 p-0"
+            >
+              <div className="flex flex-col h-full">
+                {/* Mobile Menu Header */}
+                <div className="px-6 py-6 border-b border-gray-200/50">
+                  <SheetTitle className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-rose-600 flex items-center justify-center shadow-lg">
+                      <Sparkles className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xl font-serif font-bold text-gray-900 leading-none">
+                        EventCraft
+                      </span>
+                      <span className="text-[10px] uppercase tracking-wider text-rose-500">
+                        Premium Events
+                      </span>
+                    </div>
+                  </SheetTitle>
+                </div>
+
+                {/* Mobile Menu Content */}
+                <nav className="flex-1 px-6 py-6">
+                  <NavigationMenu orientation="vertical" className="w-full">
+                    <NavigationItems
+                      isScrolled={true}
+                      isMobile={true}
+                      onItemClick={() => setMobileMenuOpen(false)}
+                    />
+                  </NavigationMenu>
+                </nav>
+
+                {/* Mobile Menu Footer */}
+                <div className="px-6 py-6 border-t border-gray-200/50 space-y-3">
+                  <button className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-3.5 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group">
+                    <span>Plan Your Event</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  </button>
+                  <div className="text-center text-xs text-gray-500">
+                    Creating unforgettable moments since 2009
+                  </div>
+                </div>
+              </div>
             </SheetContent>
           </Sheet>
         </div>
