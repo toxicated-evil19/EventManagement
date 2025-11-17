@@ -1,73 +1,113 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Calendar, Gift, Building2, PartyPopper, ChevronRight } from "lucide-react";
+import { Calendar, Gift, Building2, PartyPopper, CheckCircle2, ArrowRight } from "lucide-react";
 
 const ServicesSection = () => {
   const services = [
     {
       icon: Calendar,
       title: "Weddings",
-      description: "Transform your special day into an unforgettable celebration of love"
+      description: "Transform your special day into an unforgettable celebration of love",
+      features: ["Venue Selection", "Decor & Design", "Vendor Coordination", "Day-of Management"],
+      color: "from-rose-500 to-pink-500"
     },
     {
       icon: Building2,
       title: "Corporate Events",
-      description: "Create impactful business gatherings that leave lasting impressions"
+      description: "Create impactful business gatherings that leave lasting impressions",
+      features: ["Conference Planning", "Team Building", "Product Launches", "Networking Events"],
+      color: "from-purple-500 to-indigo-500"
     },
     {
       icon: PartyPopper,
       title: "Birthday Parties",
-      description: "Design extraordinary celebrations that bring joy and excitement"
+      description: "Design extraordinary celebrations that bring joy and excitement",
+      features: ["Theme Design", "Entertainment", "Catering Services", "Party Favors"],
+      color: "from-amber-500 to-orange-500"
     },
     {
       icon: Gift,
       title: "Special Occasions",
-      description: "Craft bespoke events that capture life's precious moments"
+      description: "Craft bespoke events that capture life's precious moments",
+      features: ["Anniversaries", "Engagements", "Baby Showers", "Milestone Celebrations"],
+      color: "from-emerald-500 to-teal-500"
     }
   ];
 
   return (
-    <section className="relative py-8 md:py-16 px-4 sm:px-6 lg:px-8 container mx-auto overflow-hidden">
-      {/* Simplified background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-rose-100/50 pointer-events-none rounded-lg"></div>
+    <section className="py-16 md:py-24 container mx-auto px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-50/30 to-transparent pointer-events-none" />
 
-      <div className="relative">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-center mb-6 md:mb-8">
-          Our Services
-        </h2>
-        <p className="text-sm sm:text-base md:text-lg text-center text-gray-600 mb-8 sm:mb-10 md:mb-16 max-w-xl mx-auto">
-          Experience excellence in event planning with our comprehensive range of services.
-        </p>
+      <div className="relative max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif mb-6">
+            Our Services
+          </h2>
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Experience excellence in event planning with our comprehensive range of services tailored to your unique vision
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {services.map((service, index) => (
-            <Card
+            <div
               key={index}
-              className="group transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-200 rounded-lg bg-white"
+              className="group relative bg-white rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 border border-rose-50 overflow-hidden"
             >
-              <CardHeader>
-                <div className="w-12 sm:w-14 h-12 sm:h-14 bg-rose-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-rose-200 transition-colors duration-300">
-                  <service.icon className="w-6 h-6 sm:w-7 text-rose-500 group-hover:text-rose-600 transition-colors duration-300" />
+              {/* Background Gradient on Hover */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+
+              <div className="relative">
+                {/* Icon */}
+                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
+                  <service.icon className="w-8 h-8 md:w-10 md:h-10 text-white" />
                 </div>
-                <CardTitle className="font-serif text-lg sm:text-xl text-center">
+
+                {/* Title & Description */}
+                <h3 className="text-2xl md:text-3xl font-serif mb-3 text-gray-900 group-hover:text-rose-600 transition-colors duration-300">
                   {service.title}
-                </CardTitle>
-                <CardDescription className="text-sm text-gray-500 text-center">
+                </h3>
+                <p className="text-sm md:text-base text-gray-600 mb-6 leading-relaxed">
                   {service.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <Button
-                  variant="ghost"
-                  className="group-hover:translate-x-1 transition-transform duration-300 text-rose-500 hover:text-rose-600 hover:bg-rose-50 p-0"
-                >
-                  Explore Service
-                  <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </Button>
-              </CardContent>
-            </Card>
+                </p>
+
+                {/* Features List */}
+                <div className="space-y-3 mb-6">
+                  {service.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-rose-500 flex-shrink-0" />
+                      <span className="text-sm md:text-base text-gray-700">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Learn More Link */}
+                <button className="flex items-center gap-2 text-rose-600 font-semibold group-hover:gap-4 transition-all duration-300">
+                  <span>Learn More</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+              </div>
+
+              {/* Decorative Circle */}
+              <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-rose-100 rounded-full opacity-20 group-hover:scale-150 group-hover:opacity-30 transition-all duration-700" />
+            </div>
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-16 md:mt-20 text-center">
+          <div className="bg-gradient-to-br from-rose-50 to-rose-100/50 rounded-3xl p-8 md:p-12 border border-rose-100">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-4 text-gray-900">
+              Can't Find What You're Looking For?
+            </h3>
+            <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8 max-w-2xl mx-auto">
+              We specialize in creating custom events tailored to your specific needs. Let's discuss your vision.
+            </p>
+            <button className="bg-gradient-to-r from-rose-500 to-rose-600 text-white px-8 py-3 md:px-10 md:py-4 rounded-full font-semibold text-base md:text-lg hover:shadow-xl hover:scale-105 transition-all duration-300 shadow-lg">
+              Schedule a Consultation
+            </button>
+          </div>
         </div>
       </div>
     </section>

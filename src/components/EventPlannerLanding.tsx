@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/user-interface/Navbar';
 import HeroSection from '@/components/user-interface/HeroSection';
+import AboutSection from '@/components/user-interface/AboutSection';
 import ServicesSection from '@/components/user-interface/ServicesSection';
 import GallerySection from '@/components/user-interface/GallerySection';
 import BookingSection from '@/components/user-interface/BookingSection';
@@ -24,9 +25,10 @@ const EventPlannerLanding = () => {
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Navbar isScrolled={isScrolled} />
       <HeroSection />
+      <AboutSection/>
       <ServicesSection />
       <GallerySection />
-      {/* <BookingSection /> */}
+      <BookingSection />
       {/* <DigitalToolsSection /> */}
       <Footer />
     </div>
