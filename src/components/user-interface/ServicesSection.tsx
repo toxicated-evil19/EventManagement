@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, Gift, Building2, PartyPopper, CheckCircle2, ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
 
 const ServicesSection = () => {
   const services = [
@@ -39,21 +40,31 @@ const ServicesSection = () => {
 
       <div className="relative max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <motion.div
+          className="text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif mb-6">
             Our Services
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Experience excellence in event planning with our comprehensive range of services tailored to your unique vision
           </p>
-        </div>
+        </motion.div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
               className="group relative bg-white rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 border border-rose-50 overflow-hidden"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
             >
               {/* Background Gradient on Hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
@@ -91,12 +102,18 @@ const ServicesSection = () => {
 
               {/* Decorative Circle */}
               <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-rose-100 rounded-full opacity-20 group-hover:scale-150 group-hover:opacity-30 transition-all duration-700" />
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-16 md:mt-20 text-center">
+        <motion.div
+          className="mt-16 md:mt-20 text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
           <div className="bg-gradient-to-br from-rose-50 to-rose-100/50 rounded-3xl p-8 md:p-12 border border-rose-100">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-4 text-gray-900">
               Can't Find What You're Looking For?
@@ -108,7 +125,7 @@ const ServicesSection = () => {
               Schedule a Consultation
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

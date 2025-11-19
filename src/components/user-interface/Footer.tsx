@@ -190,12 +190,11 @@ const Footer = () => {
         <div className="pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} EventCraft. All rights reserved. Crafted with <Heart className="inline w-4 h-4 text-rose-400" /> for unforgettable moments.
+              © {new Date().getFullYear()} EventCraft. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm text-gray-400">
               <a href="#" className="hover:text-rose-400 transition-colors duration-300">Privacy Policy</a>
               <a href="#" className="hover:text-rose-400 transition-colors duration-300">Terms of Service</a>
-              <a href="#" className="hover:text-rose-400 transition-colors duration-300">Cookie Policy</a>
             </div>
           </div>
         </div>
