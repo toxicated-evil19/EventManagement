@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { MapPin, CalendarDays, Users, Heart, Sparkles } from "lucide-react";
+import { motion } from "motion/react";
 
 const GallerySection = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -93,15 +94,33 @@ const GallerySection = () => {
       <div className="relative max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif mb-6">
+          <motion.h2
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             Event Gallery
-          </h2>
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-10 md:mb-12">
+          </motion.h2>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-10 md:mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
             Explore our curated collection of extraordinary events and celebrations that showcase our passion for perfection
-          </p>
+          </motion.p>
 
           {/* Filter Buttons */}
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+          <motion.div
+            className="flex flex-wrap justify-center gap-3 md:gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          >
             {filters.map((filter) => (
               <button
                 key={filter.value}
@@ -116,7 +135,7 @@ const GallerySection = () => {
                 <span className="text-sm md:text-base">{filter.label}</span>
               </button>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Gallery Grid */}
@@ -132,7 +151,7 @@ const GallerySection = () => {
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover transform transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
+                      className="w-full h-full object-cover transform transition-all duration-700 group-hover:scale-110"
                     />
                   </div>
 
